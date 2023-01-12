@@ -1,0 +1,28 @@
+version: "3.7"
+
+networks:
+  test-net:
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      target: api
+    environment:
+      - LOCAL_PORT_API=4040
+    ports:
+      - 4040:4040
+    networks:
+      - test-net
+  
+  app:
+    build:
+      dockerfile: Dockerfile
+      target: app
+    environment:
+      - LOCAL_PORT_APP=5000
+    ports:
+      - 5000:80
+    networks:
+      - test-net
+    
